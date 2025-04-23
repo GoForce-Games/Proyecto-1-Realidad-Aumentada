@@ -70,9 +70,18 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "6e817d9c-3d13-47d5-b969-41a08ac67f25",
                     "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MoveX",
+                    "type": "Value",
+                    "id": "3b290877-843f-4677-a536-03aa522d1d71",
+                    "expectedControlType": "Analog",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -313,11 +322,33 @@
                 {
                     "name": "",
                     "id": "b625037c-3ec4-43dd-a92d-bb2d46395759",
-                    "path": "<HandheldARInputDevice>/deviceRotation/x",
+                    "path": "<FaceInput>/leftEyeClosed",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c10710e-bebe-4717-9488-1791e24aef68",
+                    "path": "<FaceInput>/rightEyeClosed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bfb8988-8c49-45d4-8f4a-bbd8ce60144c",
+                    "path": "<FaceInput>/tiltX",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveX",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -2263,6 +2294,54 @@
                     "processors": "",
                     "groups": "",
                     "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Face",
+            "id": "12b12494-5170-4002-9a06-c1f19baa08eb",
+            "actions": [
+                {
+                    "name": "Tilt",
+                    "type": "Button",
+                    "id": "01c42d36-335a-4b20-97f4-af1c79191f30",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Blink",
+                    "type": "Button",
+                    "id": "8bff2ec5-e8b7-4d0d-9998-a29c8827f5ac",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "71e5782b-ea7e-46d1-b014-71e4d83f0a85",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e87bc94b-c979-49dc-8f6c-3ec2ee549f2b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Blink",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

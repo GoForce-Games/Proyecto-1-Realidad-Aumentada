@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/FaceTrackingGame/Scenes/Death Screen.unity
     guid: e413f57c8ceec4c22b5dda8cdfab0b97
   - enabled: 1
-    path: Assets/FaceTrackingGame/Scenes/PlatformSpawnerDev.unity
+    path: Assets/FaceTrackingGame/Scenes/RogerDev.unity
     guid: bd03fd854bf8a354589a51d3c1b0ee05
   - enabled: 1
     path: Assets/FaceTrackingGame/Scenes/PlayerControlDev.unity
