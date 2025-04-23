@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FaceTrackingGame/Scenes/PlayerControlDev.unity
     guid: d48bd8b9bfabebe47a7c4c271dfe59b0
+  - enabled: 1
+    path: Assets/FaceTrackingGame/Scenes/credits.unity
+    guid: 11f68cbe92924420f93614372248d6d0
+  - enabled: 1
+    path: Assets/FaceTrackingGame/Scenes/MainMenu.unity
+    guid: 6ebaa8308e5284dd7a6aed150e82d9d7
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: c52d3bb36b4c86f47af54ab9c7a02589,
       type: 2}
