@@ -9,41 +9,47 @@ using UnityEngine.XR.ARSubsystems;
 
 public class PlayerController : MonoBehaviour
 {
+    public float jumpPower;
+    public float moveSpeed;
+    public float coyoteTime = 0.2f;
 
-    public TMP_Text text;
-    
-    //private ARFaceManager m_faceManager;
+    private Rigidbody rb;
+    private bool m_grounded = false;
 
     private void Start()
     {
-        //m_faceManager = FindObjectOfType<ARFaceManager>();
+        rb = GetComponent<Rigidbody>();
     }
-
 
     private void Update()
     {
+        
         if (FaceMoveToInput.jump)
         {
-            transform.Translate(Vector3.up * 1.0f);
+            rb.velocity += new Vector3(0, rb.velocity.y, 0);
         }
         
-        transform.Translate(Vector3.right * (FaceMoveToInput.tilt * 0.01f));
-        text.text = FaceMoveToInput.tilt.ToString();
+        rb.velocity = new Vector3(FaceMoveToInput.tilt*moveSpeed, rb.velocity.y, 0);
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    void OnCollisionEnter(Collision collision)
     {
-        if (context.performed)
-        {
-            Debug.Log("Jump");
-            transform.Translate(Vector3.up * 1.0f);
-        }
+        m_grounded = true;
     }
-    public void OnMoveX(InputAction.CallbackContext context)
+
+    void OnCollisionExit(Collision collision)
     {
-        if (context.performed)
-        {
-            transform.Translate(Vector3.right * 1.0f);
-        }
+        StartCoroutine(CoyoteTime());
+        m_grounded = false;
     }
+
+    // https://en.wiktionary.org/wiki/coyote_time
+    // Used in the context of jumping in the game
+    IEnumerator CoyoteTime()
+    { 
+        if (!FaceMoveToInput.jump)
+            yield return new WaitForSeconds(coyoteTime);
+        m_grounded = false;
+    }
+    
 }

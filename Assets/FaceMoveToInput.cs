@@ -23,14 +23,6 @@ public class FaceMoveToInput : MonoBehaviour
 
     public static float tilt = 0.0f;
     
-    private void Awake()
-    {
-        // InputSystem.RegisterLayout<FaceInput>(
-        //     matches: new InputDeviceMatcher()
-        //         .WithInterface("FaceInput"));
-        //
-        // _face = InputSystem.AddDevice<FaceInput>("FaceInput");
-    }
 
     private void Start()
     {
@@ -55,14 +47,9 @@ public class FaceMoveToInput : MonoBehaviour
             m_faceManager.facesChanged -= OnFaceChanged;
     }
 
-    void Update()
-    {
-        //UpdateFaceTracking(face);
-    }
 
     private void OnFaceChanged(ARFacesChangedEventArgs facesChangedEventArgs)
     {
-        
         foreach (ARFace f in facesChangedEventArgs.updated)
             UpdateFaceTracking(f);
     }
@@ -83,14 +70,6 @@ public class FaceMoveToInput : MonoBehaviour
         jump = Math.Abs(rotX - startAngleX) > 15.0f;
         
         tilt = moveX;
-
-        //InputSystem.QueueDeltaStateEvent(_face.tiltX, moveX);
-        //InputSystem.QueueDeltaStateEvent(_face.leftEyeClosed, leftEyeOpen ? 0f : 1f);
-        //InputSystem.QueueDeltaStateEvent(_face.rightEyeClosed, rightEyeOpen ? 0f : 1f);
-        //InputSystem.Update();
-
-        //Debug.LogFormat("Tilt: %f\nLeft eye open: %s\nRight eye open: %s", moveX, leftEyeOpen, rightEyeOpen);
-
 
     }
 }
