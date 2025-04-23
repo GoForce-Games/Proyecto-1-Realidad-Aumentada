@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public class PlatformSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] platformPrefabs;
-    private float prevSpawnHeight = 10;
+    private float prevSpawnHeight = 0;
 
     [SerializeField] [Min(5)] private float heightLowerThreshold;
     [SerializeField] [Min(10)] private float heightHigherThreshold;
