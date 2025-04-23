@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float coyoteTime = 0.2f;
 
     private Rigidbody rb;
-    private bool m_grounded = false;
+    private bool m_grounded = true;
 
     private void Start()
     {
@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         
-        if (FaceMoveToInput.jump)
+        if (m_grounded)
         {
-            rb.velocity += new Vector3(0, rb.velocity.y, 0);
+            rb.velocity += new Vector3(0, jumpPower, 0);
         }
         
         rb.velocity = new Vector3(FaceMoveToInput.tilt*moveSpeed, rb.velocity.y, 0);
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        StartCoroutine(CoyoteTime());
+        //StartCoroutine(CoyoteTime());
         m_grounded = false;
     }
 
