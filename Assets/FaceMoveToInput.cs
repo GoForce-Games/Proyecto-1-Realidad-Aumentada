@@ -8,56 +8,88 @@ using UnityEngine.XR.ARFoundation;
 
 public class FaceMoveToInput : MonoBehaviour
 {
-    private ARFaceManager m_face = null; 
+    private ARFaceManager m_faceManager = null;
+    //public ARFace face;
 
-    private FaceInputDevice m_faceDevice = null;
+    private FaceInput _face = null;
     
     [SerializeField] private float maxTiltAngle = 15.0f;
     [SerializeField] private float tiltSensitivity = 1.0f;
 
+    private bool initialized = false;
+    private float startAngleX = 0.0f;
 
+    public static bool jump = false;
+
+    public static float tilt = 0.0f;
+    
     private void Awake()
     {
-        InputSystem.RegisterLayout<FaceInputDevice>(
-            matches: new InputDeviceMatcher()
-                .WithInterface("FaceInput"));
+        // InputSystem.RegisterLayout<FaceInput>(
+        //     matches: new InputDeviceMatcher()
+        //         .WithInterface("FaceInput"));
+        //
+        // _face = InputSystem.AddDevice<FaceInput>("FaceInput");
+    }
 
-        m_faceDevice = InputSystem.AddDevice<FaceInputDevice>("FaceInput");
+    private void Start()
+    {
+        m_faceManager = FindObjectOfType<ARFaceManager>();
     }
 
     private void OnEnable()
     {
-        if (m_face)
-            m_face.facesChanged += OnFaceChanged;
+        if (!m_faceManager)
+            m_faceManager = FindObjectOfType<ARFaceManager>();
+        
+        if (m_faceManager)
+            m_faceManager.facesChanged += OnFaceChanged;
     }
 
     private void OnDisable()
     {
-        if (m_face)
-            m_face.facesChanged -= OnFaceChanged;
+        if (!m_faceManager)
+            m_faceManager = FindObjectOfType<ARFaceManager>();
+        
+        if (m_faceManager)
+            m_faceManager.facesChanged -= OnFaceChanged;
     }
 
+    void Update()
+    {
+        //UpdateFaceTracking(face);
+    }
 
     private void OnFaceChanged(ARFacesChangedEventArgs facesChangedEventArgs)
     {
+        
         foreach (ARFace f in facesChangedEventArgs.updated)
             UpdateFaceTracking(f);
     }
 
     private void UpdateFaceTracking(ARFace face)
     {
+        float rotX = face.transform.rotation.eulerAngles.x;
         float rotZ = face.transform.rotation.eulerAngles.z;
-        float moveX = Mathf.Clamp(rotZ, -maxTiltAngle, maxTiltAngle) / maxTiltAngle;
+        if (rotZ >= 180) rotZ -= 360; 
+        float moveX = Mathf.Clamp(rotZ*tiltSensitivity, -maxTiltAngle, maxTiltAngle) / maxTiltAngle;
 
-        bool leftEyeOpen = face.leftEye.localScale.y > 0.5f;
-        bool rightEyeOpen = face.rightEye.localScale.y > 0.5f;
+        if (!initialized)
+        {
+            startAngleX = rotX;
+            initialized = true;
+        }
+
+        jump = Math.Abs(rotX - startAngleX) > 15.0f;
         
-        InputSystem.QueueDeltaStateEvent(m_faceDevice.tiltX, moveX);
-        InputSystem.QueueDeltaStateEvent(m_faceDevice.leftEyeClosed, leftEyeOpen ? 0f : 1f);
-        InputSystem.QueueDeltaStateEvent(m_faceDevice.rightEyeClosed, rightEyeOpen ? 0f : 1f);
-        InputSystem.Update();
+        tilt = moveX;
 
-        Debug.LogFormat("Tilt: %f\nLeft eye open: %s\nRight eye open: %s", moveX, leftEyeOpen, rightEyeOpen);
+        //InputSystem.QueueDeltaStateEvent(_face.tiltX, moveX);
+        //InputSystem.QueueDeltaStateEvent(_face.leftEyeClosed, leftEyeOpen ? 0f : 1f);
+        //InputSystem.QueueDeltaStateEvent(_face.rightEyeClosed, rightEyeOpen ? 0f : 1f);
+        //InputSystem.Update();
+
+        //Debug.LogFormat("Tilt: %f\nLeft eye open: %s\nRight eye open: %s", moveX, leftEyeOpen, rightEyeOpen);
 
 
     }

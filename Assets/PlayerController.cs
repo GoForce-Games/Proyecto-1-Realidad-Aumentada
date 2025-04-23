@@ -1,32 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class PlayerController : MonoBehaviour
 {
-    private InputAction m_jump;
-    private InputAction m_moveX;
+
+    public TMP_Text text;
     
-    
-    // Start is called before the first frame update
-    void Start()
+    //private ARFaceManager m_faceManager;
+
+    private void Start()
     {
-        m_jump = InputSystem.actions["Jump"];
-        m_moveX = InputSystem.actions["MoveX"];
+        //m_faceManager = FindObjectOfType<ARFaceManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        if (m_jump.IsPressed())
+        if (FaceMoveToInput.jump)
+        {
+            transform.Translate(Vector3.up * 1.0f);
+        }
+        
+        transform.Translate(Vector3.right * (FaceMoveToInput.tilt * 0.01f));
+        text.text = FaceMoveToInput.tilt.ToString();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
             Debug.Log("Jump");
+            transform.Translate(Vector3.up * 1.0f);
         }
-
-        if (m_moveX.ReadValue<int>() != 0)
+    }
+    public void OnMoveX(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            Debug.Log("MoveX");
+            transform.Translate(Vector3.right * 1.0f);
         }
     }
 }

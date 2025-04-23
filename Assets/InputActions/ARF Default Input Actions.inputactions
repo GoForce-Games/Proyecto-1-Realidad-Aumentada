@@ -2259,7 +2259,7 @@
                     "name": "Tap",
                     "type": "Button",
                     "id": "8033ae14-9be8-4aae-ba3d-917e9a81ca92",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -2294,54 +2294,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Position",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Face",
-            "id": "12b12494-5170-4002-9a06-c1f19baa08eb",
-            "actions": [
-                {
-                    "name": "Tilt",
-                    "type": "Button",
-                    "id": "01c42d36-335a-4b20-97f4-af1c79191f30",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Blink",
-                    "type": "Button",
-                    "id": "8bff2ec5-e8b7-4d0d-9998-a29c8827f5ac",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "71e5782b-ea7e-46d1-b014-71e4d83f0a85",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Tilt",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e87bc94b-c979-49dc-8f6c-3ec2ee549f2b",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Blink",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
