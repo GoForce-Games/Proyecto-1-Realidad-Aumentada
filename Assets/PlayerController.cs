@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float coyoteTime = 0.2f;
 
     private Rigidbody rb;
-    private bool m_grounded = true;
+    private bool m_grounded = false;
 
     private void Start()
     {
@@ -23,13 +23,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Vector2 movement = rb.velocity;
         
         if (m_grounded)
         {
-            rb.velocity += new Vector3(0, jumpPower, 0);
+            movement.y = jumpPower;
         }
+
+        movement.x = FaceMoveToInput.tilt * moveSpeed;
         
-        rb.velocity = new Vector3(FaceMoveToInput.tilt*moveSpeed, rb.velocity.y, 0);
+        rb.velocity = movement;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -51,5 +54,12 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(coyoteTime);
         m_grounded = false;
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Platform") && transform.position.y >= other.transform.position.y)
+        {
+            other.isTrigger = false;
+        }
+    }
 }
