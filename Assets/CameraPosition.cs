@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CameraPosition : MonoBehaviour
 {
-    public Transform player; // Asigna aquí el jugador desde el Inspector
+    private Transform player; // Asigna aquí el jugador desde el Inspector
     private float offsetY;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         // Calculamos la diferencia inicial entre cámara y jugador
         offsetY = transform.position.y - player.position.y;
     }
